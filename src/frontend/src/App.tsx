@@ -16,6 +16,7 @@ import { ProductCard, ProductCardSkeleton } from "./components/ProductCard";
 import { ProductDetail } from "./components/ProductDetail";
 import { ProductForm } from "./components/ProductForm";
 import { useAllProducts, useCreateProduct, useSeedSampleData } from "./hooks/useQueries";
+import { useActor } from "./hooks/useActor";
 
 const CATEGORIES = ["All", "Electronics", "Food", "Clothing", "Home", "Sports", "Beauty", "Books", "Toys", "Automotive", "Other"];
 
@@ -25,7 +26,9 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const { data: products = [], isLoading } = useAllProducts();
+  const { isFetching: actorFetching } = useActor();
+  const { data: products = [], isLoading: productsLoading } = useAllProducts();
+  const isLoading = actorFetching || productsLoading;
   const createProduct = useCreateProduct();
   const seedData = useSeedSampleData();
 
