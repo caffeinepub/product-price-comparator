@@ -1,0 +1,310 @@
+export type SampleProduct = {
+  name: string;
+  category: string;
+  description: string;
+  imageUrl: string;
+  tags: string[];
+  prices: { store: string; price: number; inStock: boolean }[];
+};
+
+export const SAMPLE_PRODUCTS: SampleProduct[] = [
+  {
+    name: "iPhone 15 Pro",
+    category: "Electronics",
+    description: "Apple's flagship smartphone with A17 Pro chip, titanium design, and 48MP camera system.",
+    imageUrl: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600&h=400&fit=crop",
+    tags: ["smartphone", "apple", "5g"],
+    prices: [
+      { store: "Amazon", price: 999.99, inStock: true },
+      { store: "Best Buy", price: 1049.99, inStock: true },
+      { store: "Flipkart", price: 1099.0, inStock: false },
+    ],
+  },
+  {
+    name: "Samsung Galaxy S24 Ultra",
+    category: "Electronics",
+    description: "Samsung's premium Android phone with built-in S Pen and 200MP camera.",
+    imageUrl: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=600&h=400&fit=crop",
+    tags: ["smartphone", "samsung", "android"],
+    prices: [
+      { store: "Amazon", price: 1199.99, inStock: true },
+      { store: "Flipkart", price: 1149.0, inStock: true },
+      { store: "Reliance Digital", price: 1249.0, inStock: true },
+    ],
+  },
+  {
+    name: "Sony WH-1000XM5 Headphones",
+    category: "Electronics",
+    description: "Industry-leading noise cancelling wireless headphones with 30-hour battery life.",
+    imageUrl: "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&h=400&fit=crop",
+    tags: ["headphones", "sony", "noise-cancelling", "wireless"],
+    prices: [
+      { store: "Amazon", price: 279.99, inStock: true },
+      { store: "Best Buy", price: 299.99, inStock: true },
+      { store: "Croma", price: 289.0, inStock: false },
+    ],
+  },
+  {
+    name: "Apple MacBook Air M3",
+    category: "Electronics",
+    description: "Thin and light laptop powered by Apple M3 chip with up to 18-hour battery.",
+    imageUrl: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&h=400&fit=crop",
+    tags: ["laptop", "apple", "macbook", "m3"],
+    prices: [
+      { store: "Amazon", price: 1099.99, inStock: true },
+      { store: "Apple Store", price: 1099.00, inStock: true },
+      { store: "Flipkart", price: 1149.0, inStock: true },
+    ],
+  },
+  {
+    name: "Nike Air Max 270",
+    category: "Clothing",
+    description: "Iconic Nike lifestyle sneaker with large Air unit for all-day comfort.",
+    imageUrl: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=400&fit=crop",
+    tags: ["shoes", "nike", "sneakers", "sports"],
+    prices: [
+      { store: "Nike Store", price: 150.00, inStock: true },
+      { store: "Amazon", price: 129.99, inStock: true },
+      { store: "Flipkart", price: 119.0, inStock: true },
+    ],
+  },
+  {
+    name: "Levi's 511 Slim Jeans",
+    category: "Clothing",
+    description: "Classic slim fit denim jeans with stretch for comfort and mobility.",
+    imageUrl: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=600&h=400&fit=crop",
+    tags: ["jeans", "levis", "denim", "slim-fit"],
+    prices: [
+      { store: "Amazon", price: 59.99, inStock: true },
+      { store: "Levi's Store", price: 69.50, inStock: true },
+      { store: "Myntra", price: 54.0, inStock: true },
+    ],
+  },
+  {
+    name: "Instant Pot Duo 7-in-1",
+    category: "Home",
+    description: "Multi-use pressure cooker, slow cooker, rice cooker, steamer and more.",
+    imageUrl: "https://images.unsplash.com/photo-1585515320310-259814833e62?w=600&h=400&fit=crop",
+    tags: ["kitchen", "pressure-cooker", "appliance"],
+    prices: [
+      { store: "Amazon", price: 79.99, inStock: true },
+      { store: "Walmart", price: 89.99, inStock: true },
+      { store: "Target", price: 84.99, inStock: false },
+    ],
+  },
+  {
+    name: "Dyson V15 Detect Vacuum",
+    category: "Home",
+    description: "Cordless vacuum with laser dust detection and up to 60 min run time.",
+    imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop",
+    tags: ["vacuum", "dyson", "cordless", "cleaning"],
+    prices: [
+      { store: "Amazon", price: 649.99, inStock: true },
+      { store: "Best Buy", price: 699.99, inStock: true },
+      { store: "Dyson Store", price: 649.00, inStock: true },
+    ],
+  },
+  {
+    name: "Whey Protein Powder (5 lbs)",
+    category: "Sports",
+    description: "Premium whey protein isolate with 25g protein per serving. Chocolate flavour.",
+    imageUrl: "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=600&h=400&fit=crop",
+    tags: ["protein", "fitness", "supplement", "gym"],
+    prices: [
+      { store: "Amazon", price: 54.99, inStock: true },
+      { store: "GNC", price: 64.99, inStock: true },
+      { store: "Flipkart", price: 49.0, inStock: true },
+    ],
+  },
+  {
+    name: "Yoga Mat Pro",
+    category: "Sports",
+    description: "Non-slip 6mm thick eco-friendly TPE yoga mat with alignment lines.",
+    imageUrl: "https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=600&h=400&fit=crop",
+    tags: ["yoga", "fitness", "mat", "exercise"],
+    prices: [
+      { store: "Amazon", price: 39.99, inStock: true },
+      { store: "Decathlon", price: 34.99, inStock: true },
+      { store: "Flipkart", price: 29.99, inStock: true },
+    ],
+  },
+  {
+    name: "L'Oreal Paris Revitalift Serum",
+    category: "Beauty",
+    description: "1.5% pure hyaluronic acid serum for deep hydration and plumpness.",
+    imageUrl: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&h=400&fit=crop",
+    tags: ["skincare", "serum", "loreal", "hyaluronic-acid"],
+    prices: [
+      { store: "Amazon", price: 24.99, inStock: true },
+      { store: "Nykaa", price: 22.50, inStock: true },
+      { store: "Flipkart", price: 19.99, inStock: true },
+    ],
+  },
+  {
+    name: "Maybelline Fit Me Foundation",
+    category: "Beauty",
+    description: "Lightweight matte and poreless foundation with 40 inclusive shades.",
+    imageUrl: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&h=400&fit=crop",
+    tags: ["foundation", "makeup", "maybelline", "matte"],
+    prices: [
+      { store: "Amazon", price: 9.99, inStock: true },
+      { store: "Nykaa", price: 8.50, inStock: true },
+      { store: "Flipkart", price: 7.99, inStock: true },
+    ],
+  },
+  {
+    name: "Atomic Habits - James Clear",
+    category: "Books",
+    description: "Proven framework for building good habits and breaking bad ones. #1 bestseller.",
+    imageUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&h=400&fit=crop",
+    tags: ["self-help", "habits", "productivity", "bestseller"],
+    prices: [
+      { store: "Amazon", price: 14.99, inStock: true },
+      { store: "Flipkart", price: 12.50, inStock: true },
+      { store: "BookMyShow", price: 16.00, inStock: false },
+    ],
+  },
+  {
+    name: "The Lean Startup - Eric Ries",
+    category: "Books",
+    description: "How today's entrepreneurs use continuous innovation to create successful businesses.",
+    imageUrl: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&h=400&fit=crop",
+    tags: ["startup", "business", "entrepreneur", "innovation"],
+    prices: [
+      { store: "Amazon", price: 16.99, inStock: true },
+      { store: "Flipkart", price: 13.99, inStock: true },
+    ],
+  },
+  {
+    name: "LEGO Technic Bugatti Chiron",
+    category: "Toys",
+    description: "Iconic 1:8 scale Bugatti Chiron replica with 3,599 pieces and working gearbox.",
+    imageUrl: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=600&h=400&fit=crop",
+    tags: ["lego", "technic", "building", "collector"],
+    prices: [
+      { store: "Amazon", price: 369.99, inStock: true },
+      { store: "LEGO Store", price: 379.99, inStock: true },
+      { store: "Flipkart", price: 349.0, inStock: false },
+    ],
+  },
+  {
+    name: "Nerf Elite 2.0 Commander",
+    category: "Toys",
+    description: "Motorised blaster fires up to 6 darts at once with rotating drum.",
+    imageUrl: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=600&h=400&fit=crop",
+    tags: ["nerf", "blaster", "kids", "outdoor"],
+    prices: [
+      { store: "Amazon", price: 34.99, inStock: true },
+      { store: "Walmart", price: 32.99, inStock: true },
+      { store: "Flipkart", price: 29.99, inStock: true },
+    ],
+  },
+  {
+    name: "Bosch Car Battery 60Ah",
+    category: "Automotive",
+    description: "Reliable lead-acid car battery for petrol and diesel cars. 3-year warranty.",
+    imageUrl: "https://images.unsplash.com/photo-1609592806596-05c9f28fad20?w=600&h=400&fit=crop",
+    tags: ["battery", "car", "bosch", "automotive"],
+    prices: [
+      { store: "Amazon", price: 119.99, inStock: true },
+      { store: "AutoZone", price: 129.99, inStock: true },
+      { store: "Flipkart", price: 109.0, inStock: true },
+    ],
+  },
+  {
+    name: "Michelin Pilot Sport 4 Tyre",
+    category: "Automotive",
+    description: "Ultra-high performance tyre with exceptional grip in wet and dry conditions.",
+    imageUrl: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=600&h=400&fit=crop",
+    tags: ["tyre", "michelin", "car", "performance"],
+    prices: [
+      { store: "Amazon", price: 189.99, inStock: true },
+      { store: "Tyre Shop", price: 199.99, inStock: true },
+      { store: "Flipkart", price: 179.0, inStock: false },
+    ],
+  },
+  {
+    name: "Maggi 2-Minute Noodles (12 pack)",
+    category: "Food",
+    description: "India's favourite instant noodles with masala seasoning. Pack of 12.",
+    imageUrl: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&h=400&fit=crop",
+    tags: ["noodles", "maggi", "instant", "snack"],
+    prices: [
+      { store: "Amazon", price: 8.99, inStock: true },
+      { store: "Blinkit", price: 7.50, inStock: true },
+      { store: "BigBasket", price: 8.00, inStock: true },
+    ],
+  },
+  {
+    name: "Amul Butter (500g)",
+    category: "Food",
+    description: "Fresh and creamy Amul table butter. Pasteurised, made from cow milk.",
+    imageUrl: "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=600&h=400&fit=crop",
+    tags: ["dairy", "butter", "amul", "cooking"],
+    prices: [
+      { store: "Blinkit", price: 3.49, inStock: true },
+      { store: "BigBasket", price: 3.25, inStock: true },
+      { store: "Zepto", price: 3.75, inStock: true },
+    ],
+  },
+  {
+    name: "LG 55\" 4K OLED TV",
+    category: "Electronics",
+    description: "55-inch OLED evo display with 120Hz refresh rate and webOS smart TV platform.",
+    imageUrl: "https://images.unsplash.com/photo-1593784991095-a205069470b6?w=600&h=400&fit=crop",
+    tags: ["tv", "lg", "oled", "4k", "smart-tv"],
+    prices: [
+      { store: "Amazon", price: 1299.99, inStock: true },
+      { store: "Best Buy", price: 1349.99, inStock: true },
+      { store: "Flipkart", price: 1249.0, inStock: true },
+    ],
+  },
+  {
+    name: "Adidas Ultraboost 22",
+    category: "Clothing",
+    description: "Responsive running shoe with Boost midsole cushioning and Primeknit upper.",
+    imageUrl: "https://images.unsplash.com/photo-1556048219-bb6978360b84?w=600&h=400&fit=crop",
+    tags: ["shoes", "adidas", "running", "boost"],
+    prices: [
+      { store: "Adidas Store", price: 190.00, inStock: true },
+      { store: "Amazon", price: 169.99, inStock: true },
+      { store: "Flipkart", price: 155.0, inStock: true },
+    ],
+  },
+  {
+    name: "Nescafe Gold Blend Coffee (200g)",
+    category: "Food",
+    description: "Premium instant coffee with a smooth, rich taste. Freeze-dried blend.",
+    imageUrl: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&h=400&fit=crop",
+    tags: ["coffee", "nescafe", "instant", "beverage"],
+    prices: [
+      { store: "Amazon", price: 12.99, inStock: true },
+      { store: "BigBasket", price: 11.50, inStock: true },
+      { store: "Blinkit", price: 13.25, inStock: true },
+    ],
+  },
+  {
+    name: "Philips Air Fryer HD9252",
+    category: "Home",
+    description: "Compact 1.2 kg capacity air fryer with Rapid Air technology. Up to 75% less fat.",
+    imageUrl: "https://images.unsplash.com/photo-1648560248856-c1617fbd7bc3?w=600&h=400&fit=crop",
+    tags: ["air-fryer", "philips", "kitchen", "healthy"],
+    prices: [
+      { store: "Amazon", price: 99.99, inStock: true },
+      { store: "Flipkart", price: 89.99, inStock: true },
+      { store: "Croma", price: 109.0, inStock: true },
+    ],
+  },
+  {
+    name: "PS5 DualSense Controller",
+    category: "Electronics",
+    description: "Next-gen PlayStation 5 wireless controller with haptic feedback and adaptive triggers.",
+    imageUrl: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=600&h=400&fit=crop",
+    tags: ["gaming", "playstation", "controller", "ps5"],
+    prices: [
+      { store: "Amazon", price: 69.99, inStock: true },
+      { store: "GameStop", price: 74.99, inStock: true },
+      { store: "Flipkart", price: 64.99, inStock: true },
+    ],
+  },
+];

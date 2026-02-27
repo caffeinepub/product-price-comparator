@@ -9,11 +9,13 @@ import {
   TrendingDown,
   ShoppingBag,
   X,
+  Loader2,
+  Sparkles,
 } from "lucide-react";
 import { ProductCard, ProductCardSkeleton } from "./components/ProductCard";
 import { ProductDetail } from "./components/ProductDetail";
 import { ProductForm } from "./components/ProductForm";
-import { useAllProducts, useCreateProduct } from "./hooks/useQueries";
+import { useAllProducts, useCreateProduct, useSeedSampleData } from "./hooks/useQueries";
 
 const CATEGORIES = ["All", "Electronics", "Food", "Clothing", "Home", "Sports", "Beauty", "Books", "Toys", "Automotive", "Other"];
 
@@ -25,6 +27,7 @@ export default function App() {
 
   const { data: products = [], isLoading } = useAllProducts();
   const createProduct = useCreateProduct();
+  const seedData = useSeedSampleData();
 
   // Filter products by search + category (client-side for instant feedback)
   const filteredProducts = useMemo(() => {
@@ -47,6 +50,15 @@ export default function App() {
 
     return result;
   }, [products, searchQuery, activeCategory]);
+
+  async function handleSeedData() {
+    try {
+      await seedData.mutateAsync();
+      toast.success("25 sample products loaded successfully!");
+    } catch {
+      toast.error("Failed to load sample data. Please try again.");
+    }
+  }
 
   async function handleCreateProduct(data: {
     name: string;
@@ -85,7 +97,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Header onAddProduct={() => setAddProductOpen(true)} />
+      <Header
+        onAddProduct={() => setAddProductOpen(true)}
+        onSeedData={products.length === 0 ? handleSeedData : undefined}
+        isSeedingData={seedData.isPending}
+      />
 
       <main className="flex-1 max-w-6xl mx-auto w-full px-4 sm:px-6 py-8">
         {/* Hero Tagline */}
@@ -152,6 +168,8 @@ export default function App() {
             searchQuery={searchQuery}
             category={activeCategory}
             onAddProduct={() => setAddProductOpen(true)}
+            onSeedData={handleSeedData}
+            isSeedingData={seedData.isPending}
             onClearSearch={() => {
               setSearchQuery("");
               setActiveCategory("All");
@@ -196,9 +214,13 @@ export default function App() {
 
 function Header({
   onAddProduct,
+  onSeedData,
+  isSeedingData = false,
   minimal = false,
 }: {
   onAddProduct: () => void;
+  onSeedData?: () => void;
+  isSeedingData?: boolean;
   minimal?: boolean;
 }) {
   return (
@@ -220,11 +242,30 @@ function Header({
           </div>
         </div>
 
-        <Button type="button" size="sm" onClick={onAddProduct} className="gap-1.5">
-          <Plus className="w-4 h-4" />
-          <span className="hidden sm:inline">Add Product</span>
-          <span className="sm:hidden">Add</span>
-        </Button>
+        <div className="flex items-center gap-2">
+          {onSeedData && (
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={onSeedData}
+              disabled={isSeedingData}
+              className="gap-1.5"
+            >
+              {isSeedingData ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <Sparkles className="w-4 h-4" />
+              )}
+              <span className="hidden sm:inline">{isSeedingData ? "Loading..." : "Load Sample Data"}</span>
+            </Button>
+          )}
+          <Button type="button" size="sm" onClick={onAddProduct} className="gap-1.5">
+            <Plus className="w-4 h-4" />
+            <span className="hidden sm:inline">Add Product</span>
+            <span className="sm:hidden">Add</span>
+          </Button>
+        </div>
       </div>
     </header>
   );
@@ -237,12 +278,16 @@ function EmptyState({
   searchQuery,
   category,
   onAddProduct,
+  onSeedData,
+  isSeedingData,
   onClearSearch,
 }: {
   hasProducts: boolean;
   searchQuery: string;
   category: string;
   onAddProduct: () => void;
+  onSeedData: () => void;
+  isSeedingData: boolean;
   onClearSearch: () => void;
 }) {
   if (!hasProducts) {
@@ -255,12 +300,29 @@ function EmptyState({
           No products yet
         </h3>
         <p className="text-muted-foreground font-body mb-6 max-w-sm">
-          Add your first product to start comparing prices across different stores and get AI insights.
+          Add your first product manually, or load 25 sample products with prices to explore the app instantly.
         </p>
-        <Button type="button" onClick={onAddProduct} size="lg" className="gap-2">
-          <Plus className="w-5 h-5" />
-          Add Your First Product
-        </Button>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <Button
+            type="button"
+            onClick={onSeedData}
+            disabled={isSeedingData}
+            size="lg"
+            variant="outline"
+            className="gap-2"
+          >
+            {isSeedingData ? (
+              <Loader2 className="w-5 h-5 animate-spin" />
+            ) : (
+              <Sparkles className="w-5 h-5" />
+            )}
+            {isSeedingData ? "Loading 25 products..." : "Load 25 Sample Products"}
+          </Button>
+          <Button type="button" onClick={onAddProduct} size="lg" className="gap-2">
+            <Plus className="w-5 h-5" />
+            Add Your First Product
+          </Button>
+        </div>
       </div>
     );
   }

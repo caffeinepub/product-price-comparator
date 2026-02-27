@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useActor } from "./useActor";
 import type { Product, PriceEntry } from "../backend.d";
+import { SAMPLE_PRODUCTS } from "../sampleData";
 
 // ── Product Queries ──────────────────────────────────────────────────────────
 
@@ -220,6 +221,31 @@ export function useDeletePriceEntry() {
     onSuccess: (_data, variables) => {
       queryClient.invalidateQueries({ queryKey: ["prices", variables.productId.toString()] });
       queryClient.invalidateQueries({ queryKey: ["ai-insight", variables.productId.toString()] });
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+    },
+  });
+}
+
+export function useSeedSampleData() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async () => {
+      if (!actor) throw new Error("No actor");
+      for (const sample of SAMPLE_PRODUCTS) {
+        const product = await actor.createProduct(
+          sample.name,
+          sample.category,
+          sample.description,
+          sample.imageUrl,
+          sample.tags,
+        );
+        for (const price of sample.prices) {
+          await actor.addPriceEntry(product.id, price.store, price.price, price.inStock);
+        }
+      }
+    },
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
     },
   });
